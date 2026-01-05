@@ -1,5 +1,7 @@
-# Biji
 <img width="841" height="747" alt="Screenshot 2026-01-03 123230" src="https://github.com/user-attachments/assets/26ca57b5-59b4-4e38-8559-a6abcf9ab010" />
+
+# Biji
+
 **Biji** is a defensive cybersecurity command-line tool designed for **passive web risk analysis** and **traffic anomaly detection**.
 
 This project focuses on identifying potential security misconfigurations and abnormal traffic patterns **without performing any intrusive or exploitative actions**.  
