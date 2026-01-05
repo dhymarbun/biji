@@ -51,10 +51,29 @@ All findings represent **potential security risks**, not confirmed vulnerabiliti
 ### Build
 ```bash
 go build -o biji
+```
 
-### 🚀 Usage
-## Show Help
+## 🚀 Usage
+Show Help
+```bash
 ./biji --help
+```
 
-## Show Version
+Show Version
+```bash
 ./biji --version
+```
+
+Passive Web Risk Scan
+```bash
+./biji --scan https://example.com
+```
+
+Web Scan + Report
+```bash
+./biji --scan https://example.com --report report.txt
+```
+Traffic Anomaly Detection
+```bash
+./biji --monitor access.log --threshold 100
+```
