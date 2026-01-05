@@ -1,4 +1,4 @@
-# 🌱 Biji
+# Biji
 
 **Biji** is a defensive cybersecurity command-line tool designed for **passive web risk analysis** and **traffic anomaly detection**.
 
@@ -7,43 +7,43 @@ Biji was built as a first cybersecurity portfolio project, emphasizing **ethical
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔐 Passive Web Risk Analysis
+### Passive Web Risk Analysis
 - Detects missing HTTP security headers based on OWASP Secure Headers guidance
 - Calculates a **risk score** and **risk severity level**
 - Provides **recommended defensive actions** for each missing header
 - Performs **read-only HTTP requests** (no payloads, no exploitation)
 
-### 📊 Traffic Anomaly Detection (Log-Based)
+### Traffic Anomaly Detection (Log-Based)
 - Analyzes web server access logs
 - Detects abnormal request patterns using baseline thresholds
 - Classifies traffic severity (LOW, MEDIUM, HIGH, CRITICAL)
 - Does **not** generate or simulate traffic
 
-### 🧾 Security Report Mode
+### Security Report Mode
 - Export scan results to a readable report file
 - Suitable for documentation and learning purposes
 
-### 🖥️ CLI Experience
+### CLI Experience
 - Clean, colorized terminal output
 - Beginner-friendly `--help` command
 - Tool metadata via `--version`
 
 ---
 
-## 🚫 What Biji Does NOT Do
+## What Biji Does NOT Do
 
-- ❌ No exploitation or vulnerability confirmation
-- ❌ No brute-force or fuzzing
-- ❌ No traffic generation or stress testing
-- ❌ No bypass or evasion techniques
+- No exploitation or vulnerability confirmation
+- No brute-force or fuzzing
+- No traffic generation or stress testing
+- No bypass or evasion techniques
 
 All findings represent **potential security risks**, not confirmed vulnerabilities.
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 - Go 1.22 or newer
@@ -53,7 +53,7 @@ All findings represent **potential security risks**, not confirmed vulnerabiliti
 go build -o biji
 ```
 
-## 🚀 Usage
+## Usage
 Show Help
 ```bash
 ./biji --help
