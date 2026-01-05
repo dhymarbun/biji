@@ -1,0 +1,78 @@
+package main
+
+import (
+	"flag"
+	"fmt"
+)
+
+func main() {
+	PrintBanner()
+
+	scanURL := flag.String("scan", "", "scan website")
+	logFile := flag.String("monitor", "", "analyze access log")
+	threshold := flag.Int("threshold", 100, "baseline request threshold")
+	showVersion := flag.Bool("version", false, "show version information")
+	
+	flag.Usage = func() {
+	fmt.Println("  --version          Show version and tool metadata")
+	fmt.Println("Biji is a defensive security monitoring tool.")
+	fmt.Println("It performs passive analysis only and does not exploit, attack, or send malicious traffic.\n")
+
+	fmt.Println("USAGE:")
+	fmt.Println("  Biji --scan <url>")
+	fmt.Println("  Biji --monitor <access.log> --threshold <number>\n")
+
+	fmt.Println("OPTIONS:")
+	fmt.Println("  --scan <url>        Perform passive web security header analysis")
+	fmt.Println("  --monitor <file>    Analyze web server access logs for traffic anomalies")
+	fmt.Println("  --threshold <num>   Baseline request threshold for anomaly detection\n")
+
+	fmt.Println("HOW TO READ THE OUTPUT:")
+	fmt.Println("  Missing Header      → A security configuration is not present")
+	fmt.Println("  Risk Score          → Relative security risk (not a confirmed exploit)")
+	fmt.Println("  LOW / MEDIUM / HIGH → Severity estimation based on best practices\n")
+
+	fmt.Println("IMPORTANT NOTES:")
+	fmt.Println("  - This tool does not confirm vulnerabilities")
+	fmt.Println("  - Findings indicate potential security risks")
+	fmt.Println("  - Designed for educational and white-hat purposes only\n")
+
+	fmt.Println("EXAMPLES:")
+	fmt.Println("  Biji --scan https://example.com")
+	fmt.Println("  Biji --monitor access.log --threshold 100\n")
+	}
+
+	flag.Parse()
+	if *showVersion {
+		PrintVersion()
+		return
+	}
+
+	if *scanURL != "" {
+		fmt.Println(Cyan + "Web Risk Scan" + Reset)
+		r := ScanWeb(*scanURL)
+
+		fmt.Printf(Green+"Target: %s\n"+Reset, r.URL)
+		fmt.Printf("Server: %s\n", r.ServerHeader)
+		fmt.Printf("Missing Headers: %v\n", r.MissingHeaders)
+		fmt.Printf(Yellow+"Risk: %s (%d)\n\n"+Reset, r.RiskLevel, r.RiskScore)
+	}
+
+	if *logFile != "" {
+		fmt.Println(Cyan + "Traffic Anomaly Detection" + Reset)
+		alerts := AnalyzeLog(*logFile, *threshold)
+
+		if len(alerts) == 0 {
+			fmt.Println(Green + "No anomalies detected\n" + Reset)
+		}
+
+		for _, a := range alerts {
+			fmt.Printf(
+				Red+"[ALERT] %s | Count: %d | Risk: %s\n"+Reset,
+				a.Endpoint,
+				a.Count,
+				a.Risk,
+			)
+		}
+	}
+}
